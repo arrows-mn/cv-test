@@ -8,6 +8,21 @@
 </head>
 
 <body>
+  <script>
+    (function acsTrack() {
+      var PV = "phcbehm8ryea";
+      var _ARGSV = "成果識別子";
+      var _PRICEV = "購入金額";
+      var _TKP1V = "識別パラメータ1";
+      var _TKP2V = "識別パラメータ2";
+      var _TKP3V = "識別パラメータ3";
+      var KEYS = { cid: ["CL_", "ACT_", "cid_auth_get_type"], plid: ["PL_", "APT_", "plid_auth_get_type"] };
+      var turl = "https://arrows-mn.com/track.php?p=" + PV + "&args=" + _ARGSV + "&price=" + _PRICEV + "&tkp1=" + _TKP1V + "&tkp2=" + _TKP2V + "&tkp3=" + _TKP3V;
+      var cks = document.cookie.split("; ").reduce(function (ret, s) { var kv = s.split("="); if (kv[0] && kv[1]) ret[kv[0]] = kv[1]; return ret; }, []);
+      turl = Object.keys(KEYS).reduce(function (url, k) { var vk = KEYS[k][0] + PV; var tk = KEYS[k][1] + PV; var v = "", t = ""; if (cks[vk]) { v = cks[vk]; if (cks[tk]) t = cks[tk]; } else if (localStorage.getItem(vk)) { v = localStorage.getItem(vk); t = "ls"; } if (v) url += "&" + k + "=" + v; if (t) url += "&" + KEYS[k][2] + "=" + t; return url; }, turl);
+      var xhr = new XMLHttpRequest(); xhr.open("GET", turl); xhr.send();
+    })();
+  </script>
   <h2>CVしました</h2>
 </body>
 
